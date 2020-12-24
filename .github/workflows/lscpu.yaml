@@ -1,0 +1,10 @@
+name: lscpu
+
+on:
+  push:
+
+jobs:
+  lscpu:
+    runs-on: ubuntu-latest
+    steps:
+      - run: lscpu
