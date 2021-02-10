@@ -1,0 +1,22 @@
+name: Whitespace in GH Actions
+
+on:
+  push:
+
+jobs:
+  whitespace:
+    runs-on: ubuntu-latest
+    env:
+      TEST_VAR1: hello
+      TEST_VAR2: yet another hacker
+    steps:
+      - name: append to vars
+        shell: bash
+        run: |
+          echo <<EOF >>$GITHUB_ENV
+          TEST_VAR1=$TEST_VAR1 world
+          TEST_VAR2=$TEST_VAR2 huh?
+          EOF
+      - name: final showdown
+        shell: bash
+        run: echo "$TEST_VAR1 and $TEST_VAR2"
