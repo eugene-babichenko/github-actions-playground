@@ -1,0 +1,19 @@
+name: Execute step based on previous step failure
+
+on:
+  push:
+
+jobs:
+  whitespace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: This step fails
+        shell: bash
+        run: exit 1
+      - name: This step must output a message to the terminal
+        if: ${{ failure() }}
+        shell: bash
+        run: echo "Hello, world!"
+      - name: This step must not run
+        shell: bash
+        run: exit 1
