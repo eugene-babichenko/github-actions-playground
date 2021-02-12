@@ -4,10 +4,13 @@ on:
   push:
 
 jobs:
-  whitespace:
+  failing_job:
     runs-on: ubuntu-latest
     steps:
       - name: This step fails
+        shell: bash
+        run: exit 1
+      - name: This step fails [2]
         shell: bash
         run: exit 1
       - name: This step must output a message to the terminal
