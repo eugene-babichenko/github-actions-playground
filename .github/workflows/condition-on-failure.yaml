@@ -25,7 +25,7 @@ jobs:
 
   runs_on_failure:
     needs: failing_job
-    if: ${{ always() && needs.failing_job.outputs.status == 'failure' }}
+    if: ${{ needs.failing_job.outputs.status == 'failure' }}
     runs-on: ubuntu-latest
     steps:
       - name: Handle another job failure
