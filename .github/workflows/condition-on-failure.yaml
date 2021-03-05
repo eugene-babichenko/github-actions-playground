@@ -6,6 +6,8 @@ on:
 jobs:
   failing_job:
     runs-on: ubuntu-latest
+    outputs:
+      status: ${{ job.status }}
     steps:
       - name: This step fails
         shell: bash
@@ -20,3 +22,12 @@ jobs:
       - name: This step must not run
         shell: bash
         run: exit 1
+
+  runs_on_failure:
+    needs: failing_job
+    if: ${{ always() && needs.failing_job.outputs.status == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Handle another job failure
+        shell: bash
+        run: echo "test"
