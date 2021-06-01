@@ -1,0 +1,24 @@
+on:
+  push:
+
+name: Slack notification
+
+jobs:
+  send_slack_notification:
+    name: Notify the team Slack channel about this release
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - name: Status is bad
+        run: |
+          cat <<EOF >> $GITHUB_ENV
+          SLACK_COLOR=failure
+          SLACK_MESSAGE=the release is broken(
+          EOF
+      - name: Send notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: GitHub Actions automated release
+          SLACK_COLOR: ${{ env.SLACK_COLOR  }}
+          SLACK_MESSAGE: ${{ env.SLACK_MESSAGE  }}
