@@ -12,7 +12,7 @@ jobs:
       - name: Status is bad
         run: |
           cat <<EOF >> $GITHUB_ENV
-          SLACK_COLOR=failure
+          SLACK_COLOR=success
           SLACK_MESSAGE=the release is broken(
           EOF
       - name: Send notification
