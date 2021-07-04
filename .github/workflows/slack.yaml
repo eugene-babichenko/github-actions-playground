@@ -16,9 +16,9 @@ jobs:
           SLACK_MESSAGE=the release is broken(
           EOF
       - name: Send notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_USERNAME: GitHub Actions automated release
-          SLACK_COLOR: ${{ env.SLACK_COLOR  }}
-          SLACK_MESSAGE: ${{ env.SLACK_MESSAGE  }}
+        uses: eugene-babichenko/slack-notifier@master
+        inputs:
+          webhook: ${{ secrets.SLACK_WEBHOOK }}
+          username: GitHub Actions automated release
+          status: ${{ env.SLACK_COLOR  }}
+          text: ${{ env.SLACK_MESSAGE  }}
