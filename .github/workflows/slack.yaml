@@ -17,7 +17,7 @@ jobs:
           EOF
       - name: Send notification
         uses: eugene-babichenko/slack-notifier@master
-        inputs:
+        with:
           webhook: ${{ secrets.SLACK_WEBHOOK }}
           username: GitHub Actions automated release
           status: ${{ env.SLACK_COLOR  }}
